@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- โค้ด Google AdSense ของคุณ -->
+    <!-- สคริปต์หลัก Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8128650430807305" crossorigin="anonymous"></script>
 
     <style>
@@ -42,7 +42,7 @@
             padding: 20px;
         }
 
-        /* โครงสร้าง Grid หลัก 3 คอลัมน์ ตามรูปของคุณ */
+        /* โครงสร้าง Grid หลัก 3 คอลัมน์ */
         .layout-container {
             display: grid;
             grid-template-columns: 280px 1fr 280px;
@@ -65,6 +65,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+            min-height: 500px;
         }
 
         .ad-label {
@@ -166,13 +167,13 @@
             word-break: break-all;
         }
 
-        /* รองรับการแสดงผลบนมือถือ (Responsive) */
+        /* รองรับหน้าจอมือถือ (Responsive) */
         @media (max-width: 900px) {
             .layout-container {
                 grid-template-columns: 1fr;
             }
             .side-ad-banner {
-                min-height: 200px;
+                min-height: 250px;
             }
         }
     </style>
@@ -181,20 +182,28 @@
 
     <div class="layout-container">
         
-        <!-- 1. โฆษณาฝั่งซ้าย -->
+        <!-- 1. โฆษณาฝั่งซ้าย (Ad Unit: BF1) -->
         <aside class="side-ad-banner">
             <span class="ad-label">Sponsor</span>
-            <!-- นำโค้ด AdSense Vertical Banner มาแปะตรงนี้ -->
-            <p style="color: var(--text-sub); font-size: 14px;">[ โฆษณา AdSense ฝั่งซ้าย ]</p>
+            <ins class="adsbygoogle"
+                 style="display:block; width:100%;"
+                 data-ad-client="ca-pub-8128650430807305"
+                 data-ad-slot="9697084045"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </aside>
 
         <!-- 2. พื้นที่ตรงกลาง (Affiliate + Countdown) -->
         <main class="center-content">
             
-            <!-- กรอบสีเหลือง/ทอง สำหรับลงโปรโมชัน Affiliate -->
+            <!-- กรอบสีทองสำหรับลงโปรโมชัน Affiliate -->
             <div class="affiliate-box">
                 <h3>สิทธิพิเศษระหว่างรอ</h3>
                 <p>คูปองส่วนลดพิเศษประจำวัน ช้อปสุดคุ้มกดรับสิทธิ์ได้เลย</p>
+                <!-- เปลี่ยนลิงก์ข้างล่างนี้เป็น Affiliate Link ของคุณ -->
                 <a href="https://s.shopee.co.th/YOUR_AFFILIATE_LINK" target="_blank" class="affiliate-btn">
                     รับส่วนลด/ดูโปรโมชัน
                 </a>
@@ -212,11 +221,18 @@
 
         </main>
 
-        <!-- 3. โฆษณาฝั่งขวา -->
+        <!-- 3. โฆษณาฝั่งขวา (Ad Unit: BF1) -->
         <aside class="side-ad-banner">
             <span class="ad-label">Sponsor</span>
-            <!-- นำโค้ด AdSense Vertical Banner มาแปะตรงนี้ -->
-            <p style="color: var(--text-sub); font-size: 14px;">[ โฆษณา AdSense ฝั่งขวา ]</p>
+            <ins class="adsbygoogle"
+                 style="display:block; width:100%;"
+                 data-ad-client="ca-pub-8128650430807305"
+                 data-ad-slot="9697084045"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </aside>
 
     </div>
