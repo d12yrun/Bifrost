@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Redirect | นำท่านไปยังปลายทาง</title>
+    
+    <!-- ฟอนต์ Google Font (Inter & Prompt) เพิ่มความพรีเมียม -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- โค้ด Google AdSense ของคุณ -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8128650430807305" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-color: #12151c;
+            --panel-bg: #1e222d;
+            --accent-gold: #f5b041;
+            --accent-blue: #0f4c81;
+            --text-main: #f0f3f6;
+            --text-sub: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* โครงสร้าง Grid หลัก 3 คอลัมน์ ตามรูปของคุณ */
+        .layout-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 20px;
+            width: 100%;
+            max-width: 1300px;
+            min-height: 600px;
+        }
+
+        /* แถบโฆษณา ซ้าย-ขวา */
+        .side-ad-banner {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 11px;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* กล่องตรงกลาง (Main Content) */
+        .center-content {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* โซน Affiliate ตรงกลาง (กรอบสีเหลืองทองพรีเมียม) */
+        .affiliate-box {
+            background: linear-gradient(135deg, #f5b041 0%, #f39c12 100%);
+            color: #12151c;
+            width: 100%;
+            flex-grow: 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .affiliate-box h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .affiliate-box p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .affiliate-btn {
+            background: #12151c;
+            color: #f5b041;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .affiliate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* ปุ่มและแถบนับถอยหลังด้านล่าง */
+        .countdown-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .countdown-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #0f4c81 0%, #1e3c72 100%);
+            color: #ffffff;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(15, 76, 129, 0.4);
+        }
+
+        .countdown-btn:hover {
+            opacity: 0.95;
+        }
+
+        .target-url-text {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-sub);
+            word-break: break-all;
+        }
+
+        /* รองรับการแสดงผลบนมือถือ (Responsive) */
+        @media (max-width: 900px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+            .side-ad-banner {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-container">
+        
+        <!-- 1. โฆษณาฝั่งซ้าย -->
+        <aside class="side-ad-banner">
+            <span class="ad-label">Sponsor</span>
+            <!-- นำโค้ด AdSense Vertical Banner มาแปะตรงนี้ -->
+            <p style="color: var(--text-sub); font-size: 14px;">[ โฆษณา AdSense ฝั่งซ้าย ]</p>
+        </aside>
+
+        <!-- 2. พื้นที่ตรงกลาง (Affiliate + Countdown) -->
+        <main class="center-content">
+            
+            <!-- กรอบสีเหลือง/ทอง สำหรับลงโปรโมชัน Affiliate -->
+            <div class="affiliate-box">
+                <h3>สิทธิพิเศษระหว่างรอ</h3>
+                <p>คูปองส่วนลดพิเศษประจำวัน ช้อปสุดคุ้มกดรับสิทธิ์ได้เลย</p>
+                <a href="https://s.shopee.co.th/YOUR_AFFILIATE_LINK" target="_blank" class="affiliate-btn">
+                    รับส่วนลด/ดูโปรโมชัน
+                </a>
+            </div>
+
+            <!-- ปุ่มนับถอยหลังไปยังปลายทางจริง -->
+            <div class="countdown-container">
+                <a id="destination-btn" href="#" class="countdown-btn">
+                    Going to destination in ..... (<span id="timer">5</span>)
+                </a>
+                <div class="target-url-text">
+                    To : <span id="display-url">https://...</span>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- 3. โฆษณาฝั่งขวา -->
+        <aside class="side-ad-banner">
+            <span class="ad-label">Sponsor</span>
+            <!-- นำโค้ด AdSense Vertical Banner มาแปะตรงนี้ -->
+            <p style="color: var(--text-sub); font-size: 14px;">[ โฆษณา AdSense ฝั่งขวา ]</p>
+        </aside>
+
+    </div>
+
+    <script>
+        // อ่านค่า URL ปลายทางจาก Parameter ?target=
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('target');
+
+        const destBtn = document.getElementById('destination-btn');
+        const displayUrl = document.getElementById('display-url');
+        const timerEl = document.getElementById('timer');
+
+        if (targetUrl) {
+            destBtn.href = targetUrl;
+            displayUrl.textContent = targetUrl;
+        } else {
+            displayUrl.textContent = 'ไม่พบ URL ปลายทาง';
+        }
+
+        // ระบบนับถอยหลัง 5 วินาที
+        let seconds = 5;
+        const countdown = setInterval(() => {
+            seconds--;
+            timerEl.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                destBtn.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
+                destBtn.innerHTML = 'ไปยังปลายทางทันที (Click Here)';
+                if (targetUrl) {
+                    window.location.href = targetUrl; // ส่งไปปลายทางอัตโนมัติ
+                }
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
